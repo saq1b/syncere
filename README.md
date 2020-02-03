@@ -1,6 +1,6 @@
 # syncere
 This python script helps you sync a folder on your PC with a folder on your android device.
-Recognises the files that are not on your android device and transfer these files to the folder via adb.
+Recognises the files that are "on your PC but not on android device" and the files that are "on the device but not on PC" and eventually transfer these files to the folder via adb.
 
 <hr>
 
