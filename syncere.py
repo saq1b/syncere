@@ -1,3 +1,4 @@
+# Primary file
 import os
 from colorama import init
 from termcolor import colored
@@ -24,29 +25,44 @@ if sys.argv[1]!='':
 # print(devPath)
 print("Will copy files from " + devPath)
 files=os.listdir(localPath)
+# os.system()
+# files=subprocess.check_output("dir "+localPath+" /b *.mp3", shell=True).decode().split('\r\n')
+for i in files:
+    if not i.endswith('mp3'):
+        files.remove(i)
 files=set(files)
-cmd="adb shell ls -a " + devPath 
+cmd="adb shell ls -a " + devPath # +"*.mp3"
 deviceFiles=subprocess.check_output(cmd,shell=True).decode().split('\r\r\n')
+for i in deviceFiles:  # repetative code
+    if not i.endswith('mp3'):
+        deviceFiles.remove(i)
 deviceFiles=set(deviceFiles)
 filesToSend=files-deviceFiles-{''}
 filesToReceive=deviceFiles-files-{''}
-print(colored("On PC", "blue"))
-print(files)
-print(colored("On device", "red"))
-print(deviceFiles)
-print(colored("Files To Receive", "green"))
-print(filesToReceive)
-choice=int(input("1. Pull From Device\n2. Push to device"))
-def _push():
+def printList(a):
+    c=1
+    for i in a:
+        print(c,i)
+        c+=1
+# print(colored("On PC", "blue"))
+# print(files)
+# print(colored("On device", "red"))
+# print(deviceFiles)
+print(colored("Files To Receive", "green", "on_white"))
+printList(filesToReceive)
+print(colored("Files To Send", "red","on_white"))
+printList(filesToSend)
+choice=int(input("1. Pull From Device\n2. Push to device "))
+def _pull():
     # size=0
     count=0
     for f in filesToReceive:
         count+=1
         # size+=os.path.getsize(f)
         if(not justList):
-            cmd="adb pull "+devPath+str(f)+" "+str(f) 
+            cmd="adb pull \""+devPath+str(f)+"\" \""+localPath+str(f)+"\""
             os.system(cmd)
-        print(str(count) + ' ' + str(f))
+        print(colored(str(count) + ' ' + str(f)), "green")
     # print(str(size/1000000) + " Mb")
 def _push():
     size=0
@@ -55,9 +71,9 @@ def _push():
         count+=1
         size+=os.path.getsize(localPath+f)
         if(not justList):
-            cmd="adb push "+str(f)+" "+devPath+str(f)
+            cmd="adb push \""+localPath+str(f)+"\" \""+devPath+str(f)+"\""
             os.system(cmd)
-        print(str(count) + ' ' + str(f))
+        print(colored(str(count) + ' ' + str(f), "green"))
     if(not justList):
         os.system("adb shell rm "+str(devPath)+"/"+sys.argv[0])
     print(str(size/1000000) + " Mb")
