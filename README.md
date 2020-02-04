@@ -7,11 +7,13 @@ Recognises the files that are "on your PC but not on android device" and the fil
 ## Pre-requisites
 - working adb instance with address present in PATH Environment Variable.
 
+### Syntax
+python syncere.py /path/to/android/folder /path/of/local/pc/folder [-l]
+
 ## Usage
-- Download the python script.
-- Edit the devPath variable to set the device folder to sync.
+- Download the python script..
 - Connect your device via USB.
-- Run on cmd.
+- Run the python script on terminal/cmd/powershell
 - Syncing Begins.
 
 => Opitonally, -l switch can be used to list the files and total size before you actually begin the transfer process.
