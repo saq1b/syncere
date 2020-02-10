@@ -11,8 +11,8 @@ Recognises the files that are "on your PC but not on android device" and the fil
 python syncere.py /path/to/android/folder /path/of/local/pc/folder [-l]
 
 ## Usage
-- Download the python script..
-- Connect your device via USB.
+- Download the python script.
+- Connect your device via USB. (Yes, just connect, it's not necessary to select File Transfer Mode, etc.)
 - Run the python script on terminal/cmd/powershell
 - Syncing Begins.
 
